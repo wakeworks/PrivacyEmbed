@@ -1,0 +1,12 @@
+<?php
+
+use SilverStripe\Core\Manifest\ModuleResourceLoader;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorConfig;
+use SilverStripe\View\Parsers\ShortcodeParser;
+use Zazama\PrivacyEmbed\Parser\PrivacyEmbedShortcodeParser;
+
+$pluginPath = ModuleResourceLoader::singleton()->resolveURL('zazama/privacyembed:client/dist/js/tinymce_plugin.js');
+HTMLEditorConfig::get('cms')->enablePlugins(['privacyembed' => $pluginPath]);
+HtmlEditorConfig::get('cms')->addButtonsToLine(1, '| privacyembed');
+
+ShortcodeParser::get('default')->register('privacy_embed', [PrivacyEmbedShortcodeParser::class, 'iframe_parser']);

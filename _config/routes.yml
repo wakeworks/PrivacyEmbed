@@ -1,0 +1,8 @@
+---
+name: privacy-embed-routes
+Before:
+  - '#adminroutes'
+---
+SilverStripe\Control\Director:
+  rules:
+    'admin/privacyembed': Zazama\PrivacyEmbed\Controllers\PrivacyEmbedController

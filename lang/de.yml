@@ -1,0 +1,4 @@
+en:
+  Zazama\PrivacyEmbed\Controllers\PrivacyEmbedController:
+    INSERT: 'Einfügen'
+    IFRAME: 'Iframe'
