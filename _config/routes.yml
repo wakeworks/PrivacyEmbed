@@ -5,4 +5,4 @@ Before:
 ---
 SilverStripe\Control\Director:
   rules:
-    'admin/privacyembed': Zazama\PrivacyEmbed\Controllers\PrivacyEmbedController
+    'admin/privacyembed': WakeWorks\PrivacyEmbed\Controllers\PrivacyEmbedController

@@ -1,6 +1,6 @@
 <?php
 
-namespace Zazama\PrivacyEmbed\Extensions;
+namespace WakeWorks\PrivacyEmbed\Extensions;
 
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\Image;

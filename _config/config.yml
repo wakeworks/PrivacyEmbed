@@ -3,7 +3,7 @@ name: privacy-embed
 ---
 SilverStripe\Admin\LeftAndMain:
   extra_requirements_css:
-    - 'zazama/privacyembed:client/css/tinymce.css'
+    - 'wakeworks/privacyembed:client/css/tinymce.css'
 Silverstripe\SiteConfig\SiteConfig:
   extensions:
-    - Zazama\PrivacyEmbed\Extensions\SiteConfigExtension
+    - WakeWorks\PrivacyEmbed\Extensions\SiteConfigExtension

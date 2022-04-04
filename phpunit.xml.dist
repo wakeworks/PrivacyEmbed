@@ -8,7 +8,7 @@
       <directory suffix=".php">tests/</directory>
     </exclude>
   </coverage>
-  <testsuite name="zazama/privacyembed">
+  <testsuite name="wakeworks/privacyembed">
     <directory>tests/</directory>
   </testsuite>
 </phpunit>

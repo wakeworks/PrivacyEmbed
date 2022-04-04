@@ -1,7 +1,7 @@
 # Privacy Embed for Silverstripe
 
-![Packagist Version](https://img.shields.io/packagist/v/Zazama/PrivacyEmbed?style=flat-square)
-![GitHub](https://img.shields.io/github/license/Zazama/PrivacyEmbed?style=flat-square)
+![Packagist Version](https://img.shields.io/packagist/v/WakeWorks/PrivacyEmbed?style=flat-square)
+![GitHub](https://img.shields.io/github/license/WakeWorks/PrivacyEmbed?style=flat-square)
 
 ## Introduction
 
@@ -17,7 +17,7 @@ This module was only tested on >= 4.9.
 ## Installation
 
 ```
-composer require zazama/privacyembed
+composer require wakeworks/privacyembed
 ```
 
 Then dev/build?flush=1.

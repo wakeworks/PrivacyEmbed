@@ -1,5 +1,5 @@
 {
-    "name": "zazama/privacyembed",
+    "name": "wakeworks/privacyembed",
     "description": "An iframe embedding module that asks for consent before loading the content",
     "type": "silverstripe-vendormodule",
     "keywords": [
@@ -11,6 +11,7 @@
     ],
     "license": "BSD-3-Clause",
     "require": {
+        "silverstripe/framework": "^4.4",
         "silverstripe/admin": "^1.0"
     },
     "require-dev": {
@@ -19,8 +20,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Zazama\\PrivacyEmbed\\": "src/",
-            "Zazama\\PrivacyEmbed\\Tests\\": "tests/"
+            "WakeWorks\\PrivacyEmbed\\": "src/",
+            "WakeWorks\\PrivacyEmbed\\Tests\\": "tests/"
         }
     },
     "extra": {

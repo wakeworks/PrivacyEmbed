@@ -1,6 +1,6 @@
 <?php
 
-namespace Zazama\PrivacyEmbed\Controllers;
+namespace WakeWorks\PrivacyEmbed\Controllers;
 
 use SilverStripe\Admin\LeftAndMain;
 use SilverStripe\Control\Controller;
