@@ -19,12 +19,11 @@ const modalId = 'privacy-embed__dialog-wrapper';
                 let content = e.content;
                 let match = ShortcodeSerialiser.match('privacy_embed', false, content);
                 while(match) {
-                    const iframe = match.properties.iframe;
-                    const src = 'admin/privacyembed/thumbnailsrc';
+                    const src = 'admin/privacyembed/thumbnailsrc?id=' + (match.properties.backgroundimage ? match.properties.backgroundimage : '');
                     const el = jQuery('<img/>')
                         .attr('class', 'privacyembed-placeholder mceItem mceNonEditable')
                         .attr('src', src)
-                        .attr('data-shortcode', iframe);
+                        .attr('data-shortcode', match.original);
 
                     content = content.replace(match.original, (jQuery('<div/>').append(el).html()))
                     match = ShortcodeSerialiser.match('privacy_embed', false, content);
@@ -37,7 +36,7 @@ const modalId = 'privacy-embed__dialog-wrapper';
                 var wrappedContent = jQuery('<div>' + e.content + '</div>');
                 wrappedContent.find('.privacyembed-placeholder').each(function () {
                     var el = jQuery(this);
-                    el.replaceWith('[privacy_embed iframe="' + tinymce.trim(el.attr('data-shortcode')) + '"]');
+                    el.replaceWith(el.attr('data-shortcode'));
                 });
                 e.content = wrappedContent.html();
             });
@@ -101,18 +100,28 @@ jQuery.entwine('ss', ($) => {
                 iframe.removeAttribute('src');
             }
 
+            let backgroundimage = undefined;
+            if(data.backgroundimage && data.backgroundimage['Files']) {
+                backgroundimage = data.backgroundimage['Files'][0]
+            }
+
             const shortcode = ShortcodeSerialiser.serialise({
                 name: 'privacy_embed',
-                properties: { iframe: encodeURIComponent(iframe.outerHTML) },
+                properties: {
+                    iframe: encodeURIComponent(iframe.outerHTML),
+                    backgroundimage: backgroundimage,
+                    content: encodeURIComponent(data.content ? data.content : ''),
+                    buttontext: data.buttontext
+                }
             }, false);
 
-            const selection = tinymce.activeEditor.selection.setContent(shortcode);
+            const selection = tinymce.editors[0].selection.setContent(shortcode);
             this.close();
 
             return Promise.resolve();
         },
 
-        getCurrentIframe() {
+        getCurrentShortcode() {
             const editor = this.getElement().getEditor();
             const node = $(editor.getSelectedNode());
 
@@ -120,16 +129,19 @@ jQuery.entwine('ss', ($) => {
                 return null;
             }
 
-            return node[0].dataset.shortcode;
+            return ShortcodeSerialiser.match('privacy_embed', false, node[0].dataset.shortcode);
         },
 
         _renderModal(isOpen) {
             const handleHide = () => this.close();
             const handleInsert = (data) => this._handleInsert(data);
-            const currentIframe = this.getCurrentIframe();
+            const currentShortcode = this.getCurrentShortcode();
             let schemaUrl = '/admin/privacyembed/schema';
-            if(currentIframe) {
-                schemaUrl += '?iframe=' + currentIframe;
+            if(currentShortcode) {
+                let params = Object.keys(currentShortcode.properties)
+                .map(key => `${key}=${currentShortcode.properties[key]}`)
+                .join('&');
+                schemaUrl += '?' + params;
             }
 
             // create/update the react component

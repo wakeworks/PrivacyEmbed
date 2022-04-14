@@ -2,3 +2,6 @@ en:
   WakeWorks\PrivacyEmbed\Controllers\PrivacyEmbedController:
     INSERT: 'Einfügen'
     IFRAME: 'Iframe'
+    BACKGROUNDIMAGE: 'Hintergrundbild'
+    CONTENT: 'Inhalt'
+    SETTINGS: 'Einstellungen'
