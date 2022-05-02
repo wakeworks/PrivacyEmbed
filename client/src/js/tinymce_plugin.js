@@ -115,7 +115,7 @@ jQuery.entwine('ss', ($) => {
                 }
             }, false);
 
-            const selection = tinymce.editors[0].selection.setContent(shortcode);
+            const selection = tinymce.get(this.getElement()[0].id).selection.setContent(shortcode);
             this.close();
 
             return Promise.resolve();
