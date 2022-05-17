@@ -19,7 +19,7 @@
         });
 
         var overlayText = container.querySelector('.privacy-embed-content');
-        overlayText.innerHTML = overlayText.innerHTML.replace(/(?<!\$)(\$Host)/g, parsedSrc.host);
+        overlayText.innerHTML = overlayText.innerHTML.replace(/(\$Host)/g, parsedSrc.host);
     });
 
     getAllowedHosts().forEach(function(host) {
