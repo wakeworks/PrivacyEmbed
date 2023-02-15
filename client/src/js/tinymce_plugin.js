@@ -8,11 +8,13 @@ const modalId = 'privacy-embed__dialog-wrapper';
 (function () {
     if (window.tinymce) {
         window.tinymce.PluginManager.add('privacyembed', function (editor) {
-            editor.addButton('privacyembed', {
-                classes: 'privacyembed',
+            editor.ui.registry.addIcon('privacyembed-icon', `<svg width="20" height="20" version='1.1' id='Capa_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 317.855 317.855' style='enable-background:new 0 0 317.855 317.855;' xml:space='preserve'><g><path d='M158.929,317.855c-1.029,0-2.059-0.159-3.051-0.477c-33.344-10.681-61.732-31.168-84.377-60.891 c-17.828-23.401-32.103-52.526-42.426-86.566C11.661,112.506,11.461,61.358,11.461,59.209c0-5.15,3.912-9.459,9.039-9.954 c0.772-0.075,78.438-8.048,132.553-47.347c3.504-2.546,8.249-2.543,11.753,0.001C218.906,41.207,296.582,49.18,297.36,49.256 c5.123,0.5,9.034,4.807,9.034,9.953c0,2.149-0.2,53.297-17.613,110.713c-10.324,34.04-24.598,63.165-42.426,86.566 c-22.644,29.723-51.032,50.21-84.376,60.891C160.987,317.696,159.958,317.855,158.929,317.855z M31.748,67.982 c0.831,16.784,4.062,55.438,16.604,96.591c21.405,70.227,58.601,114.87,110.576,132.746 c52.096-17.916,89.335-62.711,110.713-133.202c12.457-41.074,15.653-79.434,16.472-96.134 c-22.404-3.269-80.438-14.332-127.186-45.785C112.175,53.648,54.153,64.713,31.748,67.982z' /></g></svg>`)
+            editor.ui.registry.addButton('privacyembed', {
                 tooltip: 'Embed privacy-aware iframes',
-                stateSelector: 'img.privacyembed-placeholder',
-                cmd: 'privacyembed'
+                icon: 'privacyembed-icon',
+                onAction: function() {
+                    jQuery(`#${editor.id}`).entwine('ss').openPrivacyEmbedDialog();
+                }
             })
 
             editor.on('beforeSetContent', function(e) {
@@ -40,10 +42,6 @@ const modalId = 'privacy-embed__dialog-wrapper';
                 });
                 e.content = wrappedContent.html();
             });
-
-            editor.addCommand('privacyembed', function () {
-                jQuery(`#${editor.id}`).entwine('ss').openPrivacyEmbedDialog();
-            });
         });
     }
 })();
@@ -66,6 +64,7 @@ jQuery.entwine('ss', ($) => {
 
     $(`.js-injector-boot #${modalId}`).entwine({
         Element: null,
+        Bookmark: null,
         Data: {},
 
         onunmatch() {
@@ -77,6 +76,9 @@ jQuery.entwine('ss', ($) => {
         },
 
         open() {
+            const editor = this.getElement().getEditor().getInstance();
+            this.setBookmark(editor.selection.getBookmark(2, true));
+
             this._renderModal(true);
         },
 
@@ -86,8 +88,8 @@ jQuery.entwine('ss', ($) => {
         },
 
         _handleInsert(data) {
-            const editor = this.getElement().getEditor();
-            const $node = $(editor.getSelectedNode());
+            const editor = this.getElement().getEditor().getInstance();
+            editor.selection.moveToBookmark(this.getBookmark());
 
             const iframe = $('<div />').html(data.iframe).find('> iframe')[0];
             if(!iframe|| iframe.nodeName !== 'IFRAME') {

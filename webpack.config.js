@@ -29,7 +29,6 @@ const config = [
       path: PATHS.DIST,
       filename: 'js/[name].js',
     },
-    devtool: (ENV !== 'production') ? 'source-map' : '',
     resolve: resolveJS(ENV, PATHS),
     externals,
     module: moduleJS(ENV, PATHS),
