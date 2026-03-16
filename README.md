@@ -9,10 +9,10 @@ Allows iframes to be embedded into TinyMCE in a way that asks users for permissi
 
 ## Requirements
 
-* silverstripe/framework ^5
-* silverstripe/admin ^2
+* silverstripe/framework ^6
+* silverstripe/admin ^3
 
-For Silverstripe 4, check out version/branch 1 of the module.
+For Silverstripe 5, check out version/branch 2 of the module.
 
 ## Installation
 
