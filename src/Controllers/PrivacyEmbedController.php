@@ -31,7 +31,7 @@ class PrivacyEmbedController extends Controller {
 
     public function schema() {
         $this->getResponse()->addHeader('Content-Type', 'application/json');
-        $parts = $this->getRequest()->getHeader(LeftAndMain::SCHEMA_HEADER);
+        $parts = $this->getRequest()->getHeader(FormSchema::SCHEMA_HEADER);
         $schema = FormSchema::create();
         $schema = $schema->getMultipartSchema(
             $parts,

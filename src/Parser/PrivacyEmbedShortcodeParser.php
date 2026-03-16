@@ -2,7 +2,7 @@
 
 namespace WakeWorks\PrivacyEmbed\Parser;
 
-use SilverStripe\View\ArrayData;
+use SilverStripe\Model\ArrayData;
 use SilverStripe\View\Requirements;
 use SilverStripe\Assets\Image;
 
