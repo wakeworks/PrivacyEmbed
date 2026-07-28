@@ -21,11 +21,10 @@
 
 .privacy-embed-content {
     padding: 2rem;
-    text-shadow: 0px 2px 5px #000;
 }
 
 .privacy-embed-content * {
-    color: #fff;
+    color: $text-color;
 }
 
 .privacy-embed-content a {
@@ -38,8 +37,8 @@
 
 .privacy-embed-button {
     display: inline-block;
-    background-color: #fff;
-    color: #333;
+    background-color: $link-color;
+    color: $text-color;
     padding: 0.5em 1em;
     cursor: pointer;
     border-radius: 3px;
